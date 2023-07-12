@@ -3,74 +3,93 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-export default function Navbar() {
+
+const Navbar = () => {
   const [navbarState, setNavbarState] = useState(false);
+
+  const toggleNavbar = () => {
+    setNavbarState(!navbarState);
+  };
+
+  const closeNavbar = () => {
+    setNavbarState(false);
+  };
+
   return (
     <>
       <Nav>
         <div className="brand">
-          <div className="container">
+          <div className="container" onClick={closeNavbar}>
             <img src={logo} alt="" />
             Travelo
           </div>
-          <div className="toggle">
+          <div className="toggle" onClick={toggleNavbar}>
             {navbarState ? (
-              <VscChromeClose onClick={() => setNavbarState(false)} />
+              <VscChromeClose />
             ) : (
-              <GiHamburgerMenu onClick={() => setNavbarState(true)} />
+              <GiHamburgerMenu />
             )}
           </div>
         </div>
 
-        <ul>
+        <ul className={navbarState ? "visible" : ""}>
           <li>
-            <a href="#hero">Home</a>
-          </li>
-          <li>
-            <a href="#servis">About</a>
-          </li>
-          <li>
-            <a href="#recommend">Places</a>
-          </li>
-          <li>
-            <a href="#test">Customers</a>
-          </li>
-        </ul>
-        <button>Connect</button>
-      </Nav>
-      <ResponsiveNav state={navbarState}>
-        <ul>
-          <li>
-            <a href="#hero" onClick={() => setNavbarState(false)}>
+            <a href="#hero" onClick={closeNavbar}>
               Home
             </a>
           </li>
           <li>
-            <a href="#servis" onClick={() => setNavbarState(false)}>
+            <a href="#servis" onClick={closeNavbar}>
               About
             </a>
           </li>
           <li>
-            <a href="#recommend" onClick={() => setNavbarState(false)}>
+            <a href="#recommend" onClick={closeNavbar}>
               Places
             </a>
           </li>
           <li>
-            <a href="#test" onClick={() => setNavbarState(false)}>
-            Customers
+            <a href="#test" onClick={closeNavbar}>
+              Customers
+            </a>
+          </li>
+        </ul>
+        <button>Connect</button>
+      </Nav>
+
+      <ResponsiveNav state={navbarState}>
+        <ul>
+          <li>
+            <a href="#hero" onClick={closeNavbar}>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#servis" onClick={closeNavbar}>
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#recommend" onClick={closeNavbar}>
+              Places
+            </a>
+          </li>
+          <li>
+            <a href="#test" onClick={closeNavbar}>
+              Customers
             </a>
           </li>
         </ul>
       </ResponsiveNav>
     </>
   );
-}
-
+};
 
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .brand {
     .container {
       cursor: pointer;
@@ -131,6 +150,10 @@ const Nav = styled.nav`
       width: 100%;
       .toggle {
         display: block;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
     ul {
@@ -149,14 +172,14 @@ const ResponsiveNav = styled.div`
   top: ${({ state }) => (state ? "50px" : "-400px")};
   background-color: white;
   height: 30vh;
-  width: 100%;
+  width: 95%;
   align-items: center;
   transition: 0.3s ease-in-out;
+
   ul {
     list-style-type: none;
-    width: 100%;
+
     li {
-      width: 100%;
       margin: 1rem 0;
       margin-left: 2rem;
       a {
@@ -168,6 +191,7 @@ const ResponsiveNav = styled.div`
           color: #023e8a;
         }
       }
+
       &:first-of-type {
         a {
           color: #023e8a;
@@ -177,3 +201,5 @@ const ResponsiveNav = styled.div`
     }
   }
 `;
+
+export default Navbar;

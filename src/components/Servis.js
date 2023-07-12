@@ -1,69 +1,32 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
-import service1 from "../assets/service1.png";
-import service2 from "../assets/service2.png";
-import service3 from "../assets/service3.png";
-import service4 from "../assets/service4.png";
-
-import { ImHome } from "react-icons/im";
+import { dataService } from "../lib/const";
 
 export default function Servis() {
-
-    const data = [
-      {
-        id: 1,
-        icon: service1,
-        title: "Get Best Prices",
-        subTitle:
-          "Pay through our application and save thousands and get amazing rewards.",
-      },
-      {
-        id: 2,
-        icon: service2,
-        title: "Covid Safe",
-        subTitle:
-          "We have all the curated hotels that have all the precaution for a covid safe environment.",
-      },
-      {
-        id: 3,
-        icon: service3,
-        title: "Flexible Payment",
-        subTitle:
-          " Enjoy the flexible payment through our app and get rewards on every payment.",
-      },
-      {
-        id: 4,
-        icon: service4,
-        title: "Find The Best Near You",
-        subTitle:
-          "Find the best hotels and places to visit near you in a single click.",
-      },
-    ];
-
   return (
     <Section id="servis">
-        {data.map((service) => {
-          return (
-            <div className="service" key={service.id}>
-               <div className="icon">
-                 <img src={service.icon} alt={service.title} />
-               </div>
-               <h3>{service.title}</h3>
-                <p>{service.subTitle}</p>
+      {dataService.map((service) => {
+        return (
+          <div className="service" key={service.id}>
+            <div className="icon">
+              <img src={service.icon} alt={service.title} />
             </div>
-          )
-        })}
+            <h3>{service.title}</h3>
+            <p>{service.subTitle}</p>
+          </div>
+        );
+      })}
     </Section>
-  )
+  );
 }
 
-
 const Section = styled.section`
- padding: 5rem 0;
- display: grid;
- grid-template-columns: repeat(4, 1fr);
- gap: 1rem;
-  .service{
+  padding: 5rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+
+  .service {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -71,14 +34,15 @@ const Section = styled.section`
     background-color: aliceblue;
     box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
     transition: 0.3s ease-in-out;
+
     &:hover {
       transform: translateX(0.4rem) translateY(-0.6rem);
       box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
     }
     .icon {
-       img {
-         height: 2.4rem;
-       }
+      img {
+        height: 2.4rem;
+      }
     }
   }
   @media screen and (min-width: 280px) and (max-width: 720px) {
@@ -87,4 +51,4 @@ const Section = styled.section`
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-columns: repeat(2, 1fr);
   }
-`
+`;
